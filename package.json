@@ -1,0 +1,25 @@
+{
+  "name": "just-an-api-tester",
+  "version": "0.0.1",
+  "description": "Just an API Tester",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/churmd/just-an-api-tester.git"
+  },
+  "author": "Daniel Churm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/churmd/just-an-api-tester/issues"
+  },
+  "homepage": "https://github.com/churmd/just-an-api-tester#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "newman": "^5.2.4",
+    "newman-reporter-htmlextra": "^1.21.0",
+    "npm": "^7.20.3"
+  }
+}

@@ -124,6 +124,44 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Failing Req",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 418\", function () {",
+							"    pm.response.to.have.status(418);",
+							"});",
+							"",
+							"pm.test(\"Body status is 418\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.status).to.eql(418);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/status/404",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"status",
+						"404"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

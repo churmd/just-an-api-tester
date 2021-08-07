@@ -2,17 +2,17 @@ const express = require("express");
 const newmanReporter = require("./newmanReporter");
 const path = require("path");
 const app = express();
-const port = 3000;
 
-const reportPath = path.join(__dirname, "/generatedReport/report.html");
-const collectionPath = path.join(
-    __dirname,
-    "/postman-files/ExampleTests.postman_collection.json"
-);
-const environmentPath = path.join(
-    __dirname,
-    "/postman-files/ExampleEnvironment.postman_environment.json"
-);
+const defaultReportPath = "./generatedReport/report.html";
+const defaultCollectionPath =
+    "./postman-files/ExampleTests.postman_collection.json";
+const defaultEnvironmentPath =
+    "./postman-files/ExampleEnvironment.postman_environment.json";
+
+const port = process.env.PORT || 8080;
+const reportPath = process.env.REPORT_PATH || defaultReportPath;
+const collectionPath = process.env.COLLECTION_PATH || defaultCollectionPath;
+const environmentPath = process.env.ENVIRONMENT_PATH || defaultEnvironmentPath;
 
 app.get("/healthcheck", (req, resp) => {
     resp.send('{"status": "OK"}');
@@ -28,9 +28,9 @@ app.get("/report", function (req, resp) {
 
 newmanReporter.continuousReporting(
     60,
-    reportPath,
-    collectionPath,
-    environmentPath
+    path.resolve(reportPath),
+    path.resolve(collectionPath),
+    path.resolve(environmentPath)
 );
 
 app.listen(port, () => {

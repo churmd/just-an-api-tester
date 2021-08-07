@@ -5,6 +5,7 @@ const newman = require("newman");
  * @param {String} reportPath Path of where to output the report file to
  * @param {String} collectionPath  Path to the postamn collection to run
  * @param {String} environmentPath Optional path to the postman environment if needed
+ * @throws Will throw an error if there is a problem running the colection
  */
 function createReport(reportPath, collectionPath, environmentPath = "") {
     newman.run(
@@ -20,10 +21,8 @@ function createReport(reportPath, collectionPath, environmentPath = "") {
         },
         function (err, summary) {
             if (err) {
-                console.log("Encountered an error on the collection run");
-            }
-
-            if (summary.run.failures.length > 0) {
+                throw err;
+            } else if (summary.run.failures.length > 0) {
                 console.log(
                     "There were failures in the API tests :( send an email or something"
                 );
@@ -38,6 +37,7 @@ function createReport(reportPath, collectionPath, environmentPath = "") {
  * @param {String} reportPath Path of where to output the report file to
  * @param {String} collectionPath  Path to the postamn collection to run
  * @param {String} environmentPath Optional path to the postman environment if needed
+ * @throws Will throw an error if there is a problem running the colection
  */
 function continuousReporting(
     frequency,
